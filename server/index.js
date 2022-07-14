@@ -4,11 +4,17 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import 'dotenv/config'
 
+// Routes
+import postRoutes from './routes/posts.js'
+
 const app = express();
 
 app.use(bodyParser.json({limit:"32mb", extended:true}))
 app.use(bodyParser.urlencoded({ limit:"32mb", extended:true}))
 app.use(cors())
+
+// here /posts will be the prefix: for all routes from postRoutes;
+app.use('/posts', postRoutes);
 
 const DB_CONNECTION_URL = process.env.DB_CONNECTION_URL
 const PORT = process.env.PORT || 5000
