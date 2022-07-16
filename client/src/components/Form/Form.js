@@ -3,6 +3,7 @@ import { TextField, Button, Typography, Paper } from "@mui/material";
 import FileBase from "react-file-base64";
 import { useDispatch } from "react-redux";
 import {createPost} from '../../actions/posts'
+import './styles.css'
 
 const Form = () => {
   const [postData, setPostData] = useState({
@@ -20,8 +21,8 @@ const Form = () => {
   };
   const clear = () => {};
   return (
-    <Paper>
-      <form autoComplete="off" noValidate onSubmit={handleSubmit}>
+    <Paper className="paper">
+      <form className="root form" autoComplete="off" noValidate onSubmit={handleSubmit}>
         <Typography variant="h6"> Creating a Post</Typography>
         <TextField
           name="creator"
@@ -59,7 +60,7 @@ const Form = () => {
           value={postData.tags}
           onChange={(e) => setPostData({ ...postData, tags: e.target.value })}
         />
-        <div>
+        <div className="fileInput">
           <FileBase
             type="file"
             multiple={false}
@@ -69,6 +70,7 @@ const Form = () => {
           />
         </div>
         <Button
+          className="buttoSubmit"
           variant="contained"
           color="primary"
           size="large"
