@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import {createPost, updatePost} from '../../actions/posts'
 import './styles.css'
 
-const Form = ({currentId, setCurrentId, postData, setPostData}) => {
+const Form = ({currentId, setCurrentId, postData, setPostData, initialPostDataState}) => {
   
   const dispatch = useDispatch();
 
@@ -17,7 +17,9 @@ const Form = ({currentId, setCurrentId, postData, setPostData}) => {
       dispatch(createPost(postData))
     }
   };
-  const clear = () => {};
+  const clear = () => {
+    setPostData(initialPostDataState)
+  };
   return (
     <Paper className="paper">
       <form className="root form" autoComplete="off" noValidate onSubmit={handleSubmit}>

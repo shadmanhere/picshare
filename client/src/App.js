@@ -9,14 +9,15 @@ import Form from "./components/Form/Form";
 import "./styles.css";
 
 const App = () => {
-  const [currentId, setCurrentId] = useState(null)
-  const [postData, setPostData] = useState({
+  const initialPostDataState ={
     creator: "",
     title: "",
     message: "",
     tags: "",
     selectedFile: "",
-  });
+  }
+  const [currentId, setCurrentId] = useState(null)
+  const [postData, setPostData] = useState(initialPostDataState);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -42,7 +43,7 @@ const App = () => {
               <Posts setCurrentId={setCurrentId} setPostData={setPostData}/>
             </Grid>
             <Grid item xw={12} sm={4}>
-              <Form postData={postData} currentId={currentId} setPostData={setPostData} setCurrentId={setCurrentId} />
+              <Form initialPostDataState={initialPostDataState} postData={postData} currentId={currentId} setPostData={setPostData} setCurrentId={setCurrentId} />
             </Grid>
           </Grid>
         </Container>
