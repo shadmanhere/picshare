@@ -5,14 +5,8 @@ import { useDispatch } from "react-redux";
 import {createPost, updatePost} from '../../actions/posts'
 import './styles.css'
 
-const Form = ({currentId, setCurrentId}) => {
-  const [postData, setPostData] = useState({
-    creator: "",
-    title: "",
-    message: "",
-    tags: "",
-    selectedFile: "",
-  });
+const Form = ({currentId, setCurrentId, postData, setPostData}) => {
+  
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {

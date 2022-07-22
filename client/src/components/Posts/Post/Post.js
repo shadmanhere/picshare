@@ -15,7 +15,7 @@ import { useDispatch } from "react-redux";
 import {deletePost, likePost } from '../../../actions/posts'
 import "./styles.css";
 
-const Post = ({ post, setCurrentId }) => {
+const Post = ({ post, setCurrentId, setPostData }) => {
   const dispatch = useDispatch();
   return (
     <Card className="card">
@@ -35,6 +35,7 @@ const Post = ({ post, setCurrentId }) => {
           style={{ color: "white" }}
           size="small"
           onClick={() => {
+            setPostData({...post})
             setCurrentId(post._id)
           }}
         >

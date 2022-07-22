@@ -10,6 +10,13 @@ import "./styles.css";
 
 const App = () => {
   const [currentId, setCurrentId] = useState(null)
+  const [postData, setPostData] = useState({
+    creator: "",
+    title: "",
+    message: "",
+    tags: "",
+    selectedFile: "",
+  });
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -32,10 +39,10 @@ const App = () => {
             spacing={4}
           >
             <Grid item xw={12} sm={7}>
-              <Posts setCurrentId={setCurrentId}/>
+              <Posts setCurrentId={setCurrentId} setPostData={setPostData}/>
             </Grid>
             <Grid item xw={12} sm={4}>
-              <Form currentId={currentId} setCurrentId={setCurrentId} />
+              <Form postData={postData} currentId={currentId} setPostData={setPostData} setCurrentId={setCurrentId} />
             </Grid>
           </Grid>
         </Container>
