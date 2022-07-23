@@ -1,24 +1,27 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { AppBar, Button, Typography, Toolbar, Avatar } from "@mui/material";
+import { Button, Typography, Toolbar, Avatar } from "@mui/material";
 import travel from "../../images/travel.png";
-import "./styles.css";
+
+import {StyledAppBar, StyledTypography } from "./styles.js";
+
+
+
 
 export const Navbar = () => {
   const user = null;
   return (
-    <AppBar id="appBar" position="static" color="inherit">
+    <StyledAppBar position="static" color="inherit">
       <div className="branchContainer">
-        <Typography
-          id="heading"
+        <StyledTypography
           component={Link}
           to="/"
           variant="h2"
           align="center"
         >
           Travel
-        </Typography>
-        <img id="image" src={travel} alt="travel" width="60" height="60" />
+        </StyledTypography>
+        <img src={travel} alt="travel" width="60" height="60" />
       </div>
       <Toolbar className="toolbar">
         {user ? (
@@ -48,6 +51,6 @@ export const Navbar = () => {
           </Button>
         )}
       </Toolbar>
-    </AppBar>
+    </StyledAppBar>
   );
 };
