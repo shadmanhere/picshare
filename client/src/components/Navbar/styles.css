@@ -10,6 +10,7 @@
   color: #551338;
   font-weight: 400;
   text-transform: lowercase;
+  text-decoration: none;
 }
 #image {
   margin-left: 15px;
