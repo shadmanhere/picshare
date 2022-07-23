@@ -1,50 +1,25 @@
-import React, { useEffect, useState } from "react";
-import { Container, AppBar, Typography, Grow, Grid } from "@mui/material";
-import { useDispatch } from "react-redux";
-import { getPosts } from "./actions/posts";
+import React from "react";
+import { Container } from "@mui/material";
 
-import Posts from "./components/Posts/Posts";
-import Form from "./components/Form/Form";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+
+
 import {Navbar} from "./components/Navbar/Navbar";
-import "./styles.css";
+import Home from "./components/Home/Home"
+import Auth from "./components/Auth/Auth"
 
 const App = () => {
-  const initialPostDataState ={
-    creator: "",
-    title: "",
-    message: "",
-    tags: "",
-    selectedFile: "",
-  }
-  const [currentId, setCurrentId] = useState(null)
-  const [postData, setPostData] = useState(initialPostDataState);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getPosts());
-  }, [dispatch]);
   return (
-    <Container maxWidth="lg">
-      <Navbar />
-      <Grow in>
-        <Container>
-          <Grid
-            container
-            id="mainContainer"
-            justify="space-between"
-            alignItems="stretch"
-            spacing={4}
-          >
-            <Grid item xw={12} sm={7}>
-              <Posts setCurrentId={setCurrentId} setPostData={setPostData}/>
-            </Grid>
-            <Grid item xw={12} sm={4}>
-              <Form initialPostDataState={initialPostDataState} postData={postData} currentId={currentId} setPostData={setPostData} setCurrentId={setCurrentId} />
-            </Grid>
-          </Grid>
-        </Container>
-      </Grow>
-    </Container>
+    <BrowserRouter>
+      <Container maxWidth="lg">
+        <Navbar />
+        <Routes>
+          <Route path="/" exact element ={<Home />} />
+          <Route path="/auth" exact element ={<Auth />} />
+        </Routes>
+      </Container>
+    </BrowserRouter>
   );
 };
 
