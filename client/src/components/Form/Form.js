@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { TextField, Button, Typography, Paper } from "@mui/material";
+import { TextField, Button, Typography } from "@mui/material";
 import FileBase from "react-file-base64";
 import { useDispatch } from "react-redux";
 import {createPost, updatePost} from '../../actions/posts'
-import './styles.css'
+import {StyledPaper, StyledSubmitButton} from './styles.js'
+
 
 const Form = ({currentId, setCurrentId, postData, setPostData, initialPostDataState}) => {
   
@@ -20,8 +21,10 @@ const Form = ({currentId, setCurrentId, postData, setPostData, initialPostDataSt
   const clear = () => {
     setPostData(initialPostDataState)
   };
+
+  
   return (
-    <Paper className="paper">
+    <StyledPaper>
       <form className="root form" autoComplete="off" noValidate onSubmit={handleSubmit}>
         <Typography variant="h6"> Creating a Post</Typography>
         <TextField
@@ -69,7 +72,7 @@ const Form = ({currentId, setCurrentId, postData, setPostData, initialPostDataSt
             }
           />
         </div>
-        <Button
+        <StyledSubmitButton
           className="buttoSubmit"
           variant="contained"
           color="primary"
@@ -78,7 +81,7 @@ const Form = ({currentId, setCurrentId, postData, setPostData, initialPostDataSt
           fullWidth
         >
           Submit
-        </Button>
+        </StyledSubmitButton>
         <Button
           variant="contained"
           color="secondary"
@@ -89,7 +92,7 @@ const Form = ({currentId, setCurrentId, postData, setPostData, initialPostDataSt
           Clear
         </Button>
       </form>
-    </Paper>
+    </StyledPaper>
   );
 };
 
