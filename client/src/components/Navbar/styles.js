@@ -4,7 +4,7 @@ import { styled } from "@mui/system"
 
 export const StyledAppBar = styled(AppBar, {})({
     borderRadius: 50,
-    margin: 30,
+    margin: '30px 0',
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
