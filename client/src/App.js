@@ -3,9 +3,9 @@ import { Container, AppBar, Typography, Grow, Grid } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { getPosts } from "./actions/posts";
 
-import travel from "./images/travel.png";
 import Posts from "./components/Posts/Posts";
 import Form from "./components/Form/Form";
+import {Navbar} from "./components/Navbar/Navbar";
 import "./styles.css";
 
 const App = () => {
@@ -25,12 +25,7 @@ const App = () => {
   }, [dispatch]);
   return (
     <Container maxWidth="lg">
-      <AppBar id="appBar" position="static" color="inherit">
-        <Typography id="heading" variant="h2" align="center">
-          Travel
-        </Typography>
-        <img id="image" src={travel} alt="travel" width="60" height="60" />
-      </AppBar>
+      <Navbar />
       <Grow in>
         <Container>
           <Grid
