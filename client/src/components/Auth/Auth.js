@@ -9,15 +9,32 @@ import {
 } from "@mui/material";
 import LockIcon from "@mui/icons-material/Lock";
 import Input from "./Input";
+import { useNavigate } from "react-router-dom"
+import { signin, signup } from '../../actions/auth'
+import { useDispatch } from 'react-redux'
 
-import { StyledPaper, StyledAvatar } from "./styles.js";
+import { StyledPaper, StyledAvatar } from "./styles";
+
+const initialState = {firstName:'', lastName:'',email:'',password:'',confirmPassword:''}
 
 const Auth = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [formData, setFormData] = useState(initialState);
   const [isSignup, setIsSignup] = useState(false);
-  // const isSignup = false
-  const handleSubmit = () => {};
-  const handleChange = () => {};
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if(isSignup) {
+      dispatch(signup(formData, navigate))
+    } else {
+      dispatch(signin(formData, navigate))
+    }
+  };
+  const handleChange = (e) => {
+    setFormData({...formData, [e.target.name]:e.target.value });
+  };
 
   const switchMode = () => {
     setIsSignup((prevIsSignup) => !prevIsSignup);
