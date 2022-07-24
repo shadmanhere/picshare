@@ -73,7 +73,6 @@ const Form = ({currentId, setCurrentId, postData, setPostData, initialPostDataSt
           />
         </div>
         <StyledSubmitButton
-          className="buttoSubmit"
           variant="contained"
           color="primary"
           size="large"
