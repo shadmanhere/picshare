@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 
 // Routes
 import postRoutes from './routes/posts.js'
+import userRoutes from './routes/users.js'
 
 const app = express();
 dotenv.config()
@@ -16,6 +17,7 @@ app.use(cors())
 
 // here /posts will be the prefix: for all routes from postRoutes;
 app.use('/posts', postRoutes);
+app.use('/user', userRoutes)
 
 const DB_CONNECTION_URL = process.env.DB_CONNECTION_URL
 const PORT = process.env.PORT || 5000
