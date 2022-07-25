@@ -1,4 +1,4 @@
-import {AppBar, Typography} from "@mui/material";
+import {AppBar, Typography, Toolbar} from "@mui/material";
 import { styled } from "@mui/system"
 
 
@@ -20,3 +20,14 @@ export const StyledTypography = styled(Typography,{})({
     textTransform: 'lowercase',
     textDecoration: 'none'
   })
+
+export const StyledToolbar = styled(Toolbar,{})({
+  '.profile' : {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  '.profile > *' : {
+    margin: '0 6px'
+  }
+})

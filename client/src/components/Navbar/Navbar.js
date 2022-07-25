@@ -1,15 +1,30 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Button, Typography, Toolbar, Avatar } from "@mui/material";
 import travel from "../../images/travel.png";
-
-import {StyledAppBar, StyledTypography } from "./styles.js";
+import { useDispatch } from 'react-redux';
+import {StyledAppBar, StyledTypography, StyledToolbar } from "./styles.js";
 
 
 
 
 export const Navbar = () => {
-  const user = null;
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const logout = () => {
+    dispatch({type: 'LOGOUT'})
+    navigate('/auth')
+    setUser(null);
+  }
+  useEffect(() =>{
+    const token = user?.token
+
+    setUser(JSON.parse(localStorage.getItem('profile')))
+  },[location])
+  
   return (
     <StyledAppBar position="static" color="inherit">
       <div className="branchContainer">
@@ -23,7 +38,7 @@ export const Navbar = () => {
         </StyledTypography>
         <img src={travel} alt="travel" width="60" height="60" />
       </div>
-      <Toolbar className="toolbar">
+      <StyledToolbar>
         {user ? (
           <div className="profile">
             <Avatar
@@ -36,7 +51,7 @@ export const Navbar = () => {
             <Typography className="userName" variant="h6">
               {user.result.name}
             </Typography>
-            <Button variant="contained" className="logout" color="secondary">
+            <Button variant="contained" onClick={logout} className="logout" color="secondary">
               Logout
             </Button>
           </div>
@@ -50,7 +65,7 @@ export const Navbar = () => {
             Sign In
           </Button>
         )}
-      </Toolbar>
+      </StyledToolbar>
     </StyledAppBar>
   );
 };
