@@ -15,7 +15,7 @@ import { useDispatch } from "react-redux";
 import {deletePost, likePost } from '../../../actions/posts'
 import "./styles.css";
 
-const Post = ({ post, setCurrentId, setPostData }) => {
+const Post = ({ post, setCurrentId }) => {
   const dispatch = useDispatch();
   return (
     <Card className="card">
@@ -25,7 +25,7 @@ const Post = ({ post, setCurrentId, setPostData }) => {
         title={post.title}
       ></CardMedia>
       <div className="overlay">
-        <Typography variant="h6">{post.creator}</Typography>
+        <Typography variant="h6">{post.name}</Typography>
         <Typography variant="body2">
           {moment(post.createdAt).fromNow()}
         </Typography>
@@ -35,7 +35,6 @@ const Post = ({ post, setCurrentId, setPostData }) => {
           style={{ color: "white" }}
           size="small"
           onClick={() => {
-            setPostData({...post})
             setCurrentId(post._id)
           }}
         >

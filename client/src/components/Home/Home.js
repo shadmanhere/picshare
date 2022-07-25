@@ -7,15 +7,8 @@ import Form from "../Form/Form";
 import "./style.css"
 
 const Home = () => {
-    const initialPostDataState ={
-        creator: "",
-        title: "",
-        message: "",
-        tags: "",
-        selectedFile: "",
-      }
+    
       const [currentId, setCurrentId] = useState(null)
-      const [postData, setPostData] = useState(initialPostDataState);
       const dispatch = useDispatch();
     
       useEffect(() => {
@@ -32,10 +25,10 @@ const Home = () => {
             spacing={4}
           >
             <Grid item xw={12} sm={7}>
-              <Posts setCurrentId={setCurrentId} setPostData={setPostData}/>
+              <Posts setCurrentId={setCurrentId} />
             </Grid>
             <Grid item xw={12} sm={4}>
-              <Form initialPostDataState={initialPostDataState} postData={postData} currentId={currentId} setPostData={setPostData} setCurrentId={setCurrentId} />
+              <Form currentId={currentId} setCurrentId={setCurrentId} />
             </Grid>
           </Grid>
         </Container>

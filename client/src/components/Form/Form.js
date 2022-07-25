@@ -1,42 +1,55 @@
-import React, { useState } from "react";
-import { TextField, Button, Typography } from "@mui/material";
+import React, { useState, useEffect } from "react";
+import { Paper, TextField, Button, Typography } from "@mui/material";
 import FileBase from "react-file-base64";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {createPost, updatePost} from '../../actions/posts'
 import {StyledPaper, StyledSubmitButton} from './styles.js'
 
-
-const Form = ({currentId, setCurrentId, postData, setPostData, initialPostDataState}) => {
+const initialPostDataState ={
+  title: "",
+  message: "",
+  tags: "",
+  selectedFile: "",
+}
+const Form = ({currentId, setCurrentId}) => {
   
+  const [postData, setPostData] = useState(initialPostDataState)
+  const post = useSelector((state) => currentId ? state.posts.find((p) => p._id === currentId) : null)
   const dispatch = useDispatch();
+  const user = JSON.parse(localStorage.getItem('profile'))
+
+  useEffect(() => {
+    if(post) setPostData(post)
+  },[post])
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if(currentId){
-      dispatch(updatePost(currentId,postData))  
+      dispatch(updatePost(currentId,{...postData, name: user?.result?.name}))  
     } else {
-      dispatch(createPost(postData))
+      dispatch(createPost({...postData, name: user?.result?.name}))
     }
+    clear()
   };
   const clear = () => {
+    setCurrentId(null)
     setPostData(initialPostDataState)
   };
 
+  if(!user?.result?.name) {
+    return (
+      <Paper className="name">
+        <Typography variant="h6" align="center">
+          Please Sign In to create your own posts and like other's posts.
+        </Typography>
+      </Paper>
+    );
+  }
   
   return (
     <StyledPaper>
       <form className="root form" autoComplete="off" noValidate onSubmit={handleSubmit}>
         <Typography variant="h6"> Creating a Post</Typography>
-        <TextField
-          name="creator"
-          variant="outlined"
-          label="Creator"
-          fullWidth
-          value={postData.creator}
-          onChange={(e) =>
-            setPostData({ ...postData, creator: e.target.value })
-          }
-        />
         <TextField
           name="title"
           variant="outlined"
