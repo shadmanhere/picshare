@@ -10,6 +10,8 @@ import {
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import DeleteIcon from "@mui/icons-material/Delete";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
+import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import moment from "moment";
 import { useDispatch } from "react-redux";
 import {deletePost, likePost } from '../../../actions/posts'
@@ -17,6 +19,20 @@ import "./styles.css";
 
 const Post = ({ post, setCurrentId }) => {
   const dispatch = useDispatch();
+  const user = JSON.parse(localStorage.getItem('profile'))
+
+  const Likes = () => {
+    if(post.likes.length > 0) {
+      return post.likes.find((like) => (user?.result?._id))
+      ? (
+        <><ThumbUpAltIcon fontSize="small" />&nbsp;{post.likes.lenght > 2 ? `You and ${post.likes.length - 1} others` : `${post.likes.length} like${post.likes.length > 1 ? 's' : ''}`}</>
+      ) : (
+        <><ThumbUpOffAltIcon fontSize="small" />&nbsp;{post.likes.length} {post.likes.length === 1 ? 'Like': 'Likes'}</>
+      );
+    }
+    return <><ThumbUpOffAltIcon fontSize="small" />&nbsp;Like</>;
+  }
+
   return (
     <Card className="card">
       <CardMedia
@@ -55,10 +71,8 @@ const Post = ({ post, setCurrentId }) => {
         </Typography>
       </CardContent>
       <CardActions className="cardActions">
-        <Button size="small" color="primary" onClick={() => dispatch(likePost(post._id))}>
-          <ThumbUpIcon fontSize="small" />
-          &nbsp; Like &nbsp;
-          {post.likeCount}
+        <Button size="small" color="primary" disabled={!user?.result} onClick={() => dispatch(likePost(post._id))}>
+          <Likes />
         </Button>
         <Button size="small" color="primary" onClick={() => dispatch(deletePost(post._id))}>
           <DeleteIcon fontSize="small" />
