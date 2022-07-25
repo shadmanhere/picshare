@@ -34,7 +34,7 @@ export const Navbar = () => {
           variant="h2"
           align="center"
         >
-          Travel
+          picshare
         </StyledTypography>
         <img src={travel} alt="travel" width="60" height="60" />
       </div>
